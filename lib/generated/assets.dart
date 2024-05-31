@@ -42,6 +42,8 @@ class Assets {
   static const String jsonCloud = 'assets/json/cloud.json';
   static const String jsonCompass = 'assets/json/compass.json';
   static const String jsonHumidity = 'assets/json/humidity.json';
+  static const String jsonNoInternet = 'assets/json/no_internet.json';
+  static const String jsonNotFound = 'assets/json/not_found.json';
   static const String jsonRain = 'assets/json/rain.json';
   static const String jsonSun = 'assets/json/sun.json';
   static const String jsonSunCloud = 'assets/json/sun_cloud.json';
