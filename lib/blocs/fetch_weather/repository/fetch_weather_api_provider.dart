@@ -16,7 +16,7 @@ class WeatherApiProvider {
         return ApiResponse(
           content: null,
           errorMessage:
-              'No internet connection. Please check your internet connection and try again.',
+              "No internet connection",
         );
       }
 
