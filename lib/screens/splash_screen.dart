@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lottie/lottie.dart';
 import 'dart:async';
 import 'package:sizer/sizer.dart';
 import 'package:weather_guru/screens/select_city_page.dart';
@@ -73,6 +74,21 @@ class _SplashScreenState extends State<SplashScreen>
                       SizedBox(
                         height: 40.h,
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Lottie.asset('assets/json/sun.json',
+                              height: 50, width: 50),
+                          Lottie.asset('assets/json/rain.json',
+                              height: 50, width: 50),
+                          Lottie.asset('assets/json/calm_clouds.json',
+                              height: 50, width: 50),
+                          Lottie.asset('assets/json/sun_cloud.json',
+                              height: 50, width: 50),
+                        ],
+                      ),
+                      const Center(
+                          child: SpinKitThreeBounce(color: Colors.black)),
                       const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
@@ -83,8 +99,7 @@ class _SplashScreenState extends State<SplashScreen>
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                      const Center(
-                          child: SpinKitThreeBounce(color: Colors.black)),
+
                     ],
                   ),
                 ),
