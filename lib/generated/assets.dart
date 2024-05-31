@@ -2,7 +2,6 @@
 class Assets {
   Assets._();
 
-  static const String animationsGreenn = 'assets/animations/greenn.json';
   static const String icons01d = 'assets/icons/01d.png';
   static const String icons01n = 'assets/icons/01n.png';
   static const String icons02d = 'assets/icons/02d.png';
@@ -39,9 +38,7 @@ class Assets {
   static const String images13n = 'assets/images/13n.jpeg';
   static const String images50d = 'assets/images/50d.jpeg';
   static const String images50n = 'assets/images/50n.jpeg';
-  static const String imagesWeatherGuru = 'assets/images/weather_guru.png';
   static const String jsonCalmClouds = 'assets/json/calm_clouds.json';
-  static const String jsonCitys = 'assets/json/citys.json';
   static const String jsonCloud = 'assets/json/cloud.json';
   static const String jsonCompass = 'assets/json/compass.json';
   static const String jsonHumidity = 'assets/json/humidity.json';
