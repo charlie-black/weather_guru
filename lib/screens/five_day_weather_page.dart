@@ -39,185 +39,191 @@ class _FiveDayForecastPageState extends State<FiveDayForecastPage> {
 
     return Scaffold(
       backgroundColor: kPrimaryColor,
-      body: Column(
-        children: [
-          Stack(
+      body: SingleChildScrollView(
+        physics: const ScrollPhysics(),
+        child: Container(
+          child: Column(
             children: [
-              ClipRect(
-                child: Container(
-                  height: 50.h,
-                  width: 100.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage(
-                          "assets/images/${cityWeather.weatherIcon}.jpeg"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: strokeTextWidget(
-                                  fillText: widget.cityName,
-                                  textFontSize: 30.0,
-                                  textFontWeight: FontWeight.bold)),
-                          Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: strokeTextWidget(
-                                  fillText: "Tomorrow",
-                                  textFontSize: 15.0,
-                                  textFontWeight: FontWeight.normal)),
-                        ],
+          
+              Stack(
+                children: [
+                  ClipRect(
+                    child: Container(
+                      height: 50.h,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              "assets/images/${cityWeather.weatherIcon}.jpeg"),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      child: Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 50,
-                                    offset: const Offset(0, 3),
+                          SizedBox(height: 10.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: strokeTextWidget(
+                                      fillText: widget.cityName,
+                                      textFontSize: 30.0,
+                                      textFontWeight: FontWeight.bold)),
+                              Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: strokeTextWidget(
+                                      fillText: "Tomorrow",
+                                      textFontSize: 15.0,
+                                      textFontWeight: FontWeight.normal)),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 50,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
                                   ),
+                                  child: Image.asset(
+                                    'assets/icons/${cityWeather.weatherIcon}.png',
+                                    height: 70,
+                                    width: 70,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: strokeTextWidget(
+                                      fillText:
+                                      "${cityWeather.temperature}°C",
+                                      textFontSize: 40.0,
+                                      textFontWeight: FontWeight.normal)),
+                            ],
+                          ),
+                          strokeTextWidget(
+                              fillText: cityWeather.weatherDescription,
+                              textFontSize: 20.0,
+                              textFontWeight: FontWeight.bold),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column(
+                                children: [
+                                  Lottie.asset('assets/json/wind.json',
+                                      height: 40, width: 40),
+                                  strokeTextWidget(
+                                      fillText:
+                                      "${cityWeather.windSpeed}Km/h",
+                                      textFontSize: 18.0,
+                                      textFontWeight: FontWeight.normal)
                                 ],
                               ),
-                              child: Image.asset(
-                                'assets/icons/${cityWeather.weatherIcon}.png',
-                                height: 70,
-                                width: 70,
+                              Column(
+                                children: [
+                                  Lottie.asset('assets/json/humidity.json',
+                                      height: 40, width: 40),
+                                  strokeTextWidget(
+                                      fillText: "${cityWeather.humidity}%",
+                                      textFontSize: 18.0,
+                                      textFontWeight: FontWeight.normal)
+                                ],
                               ),
-                            ),
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: strokeTextWidget(
-                                  fillText:
-                                  "${cityWeather.temperature}°C",
-                                  textFontSize: 40.0,
-                                  textFontWeight: FontWeight.normal)),
+                              Column(
+                                children: [
+                                  Lottie.asset('assets/json/cloud.json',
+                                      height: 40, width: 40),
+                                  strokeTextWidget(
+                                      fillText: "${cityWeather.cloud}%",
+                                      textFontSize: 18.0,
+                                      textFontWeight: FontWeight.normal)
+                                ],
+                              ),
+                            ],
+                          )
                         ],
                       ),
-                      strokeTextWidget(
-                          fillText: cityWeather.weatherDescription,
-                          textFontSize: 20.0,
-                          textFontWeight: FontWeight.bold),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              Lottie.asset('assets/json/wind.json',
-                                  height: 40, width: 40),
-                              strokeTextWidget(
-                                  fillText:
-                                  "${cityWeather.windSpeed}Km/h",
-                                  textFontSize: 18.0,
-                                  textFontWeight: FontWeight.normal)
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Lottie.asset('assets/json/humidity.json',
-                                  height: 40, width: 40),
-                              strokeTextWidget(
-                                  fillText: "${cityWeather.humidity}%",
-                                  textFontSize: 18.0,
-                                  textFontWeight: FontWeight.normal)
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Lottie.asset('assets/json/cloud.json',
-                                  height: 40, width: 40),
-                              strokeTextWidget(
-                                  fillText: "${cityWeather.cloud}%",
-                                  textFontSize: 18.0,
-                                  textFontWeight: FontWeight.normal)
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
+                    ),
                   ),
-                ),
+                  Positioned(
+                    top: 16,
+                    left: 16,
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
               ),
-              Positioned(
-                top: 16,
-                left: 16,
-                child: IconButton(
-                  icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+              ListView.builder(
+                itemCount: groupedForecast.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  String date = groupedForecast.keys.elementAt(index);
+                  List<Weather> dailyForecast = groupedForecast[date]!;
+              
+                  Weather? dailyCityWeather = getAvailableWeather(dailyForecast);
+                  if (dailyCityWeather == null) {
+                    return Container();
+                  }
+              
+                  return Container(
+                      margin: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.black),
+                        gradient: const LinearGradient(
+                          colors: [Colors.transparent, Colors.transparent],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.black.withOpacity(0.9),
+                          radius: 30,
+                          child: Image.asset(
+                            'assets/icons/${dailyCityWeather.weatherIcon}.png',
+                            height: 30,
+                            width: 30,
+                          ),
+                        ),
+                        title: Text(
+                          "${formatDateName(dailyCityWeather.date)}  ${dailyCityWeather.mainWeather}",
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        trailing: Text(
+                          "${dailyCityWeather.temperature}°C",
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ));
+                },
               ),
             ],
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: groupedForecast.length,
-              itemBuilder: (context, index) {
-                String date = groupedForecast.keys.elementAt(index);
-                List<Weather> dailyForecast = groupedForecast[date]!;
-
-                Weather? dailyCityWeather = getAvailableWeather(dailyForecast);
-                if (dailyCityWeather == null) {
-                  return Container();
-                }
-
-                return Container(
-                    margin: const EdgeInsets.all(8.0),
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.black),
-                      gradient: const LinearGradient(
-                        colors: [Colors.transparent, Colors.transparent],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.black.withOpacity(0.9),
-                        radius: 30,
-                        child: Image.asset(
-                          'assets/icons/${dailyCityWeather.weatherIcon}.png',
-                          height: 30,
-                          width: 30,
-                        ),
-                      ),
-                      title: Text(
-                        "${formatDateName(dailyCityWeather.date)}  ${dailyCityWeather.mainWeather}",
-                        style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      trailing: Text(
-                        "${dailyCityWeather.temperature}°C",
-                        style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ));
-              },
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

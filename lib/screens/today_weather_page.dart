@@ -34,7 +34,7 @@ class _WeatherPageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kPrimaryColor,
-        body: Container(child: _buildWeatherDetails()));
+        body: SingleChildScrollView(child: Container(child: _buildWeatherDetails())));
   }
 
   Widget _buildWeatherDetails() {
@@ -157,8 +157,7 @@ class _WeatherPageState extends State<WeatherPage> {
 
     if (todayForecast.isNotEmpty) {
       return Container(
-        height: 100.h,
-        width: 100.w,
+        width: double.infinity,
         color: kPrimaryColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,7 +165,7 @@ class _WeatherPageState extends State<WeatherPage> {
             ClipRect(
               child: Container(
                 height: 70.h,
-                width: 100.w,
+                width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   image: DecorationImage(

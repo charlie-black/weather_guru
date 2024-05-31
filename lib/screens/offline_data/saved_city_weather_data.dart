@@ -45,7 +45,7 @@ class _OfflineWeatherPageState extends State<OfflineWeatherPage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Recent Cities Weather',
-              style: TextStyle(color: kBackgroundColor)),
+              style: TextStyle(color: kBackgroundColor,fontSize: 15)),
         ),
         body: _buildWeatherList(),
       ),

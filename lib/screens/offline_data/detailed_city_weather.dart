@@ -23,7 +23,7 @@ class _DetailedSavedCityWeatherState extends State<DetailedSavedCityWeather> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
-      body: Container(child: _buildWeatherDetails()),
+      body: SingleChildScrollView(child: Container(child: _buildWeatherDetails())),
     );
   }
 
@@ -54,7 +54,6 @@ class _DetailedSavedCityWeatherState extends State<DetailedSavedCityWeather> {
     if (todayForecast.isNotEmpty) {
       return Container(
         height: 100.h,
-        width: 100.w,
         color: kPrimaryColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +61,7 @@ class _DetailedSavedCityWeatherState extends State<DetailedSavedCityWeather> {
             ClipRect(
               child: Container(
                 height: 70.h,
-                width: 100.w,
+                width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   image: DecorationImage(

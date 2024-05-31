@@ -49,6 +49,7 @@ dependencies:
   sqflite:
   path_provider:
   flutter_speed_dial:
+  google_fonts:
 
 
 dev_dependencies:
