@@ -46,6 +46,9 @@ dependencies:
   shared_preferences:
   dio:
   lottie:
+  sqflite:
+  path_provider:
+  flutter_speed_dial:
 
 
 dev_dependencies:
