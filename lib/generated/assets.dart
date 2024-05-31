@@ -39,11 +39,15 @@ class Assets {
   static const String images13n = 'assets/images/13n.jpeg';
   static const String images50d = 'assets/images/50d.jpeg';
   static const String images50n = 'assets/images/50n.jpeg';
-  static const String imagesCompass = 'assets/images/compass.png';
-  static const String imagesWeatherGuru = 'assets/images/weather_guru.jpg';
+  static const String imagesWeatherGuru = 'assets/images/weather_guru.png';
+  static const String jsonCalmClouds = 'assets/json/calm_clouds.json';
   static const String jsonCitys = 'assets/json/citys.json';
   static const String jsonCloud = 'assets/json/cloud.json';
+  static const String jsonCompass = 'assets/json/compass.json';
   static const String jsonHumidity = 'assets/json/humidity.json';
+  static const String jsonRain = 'assets/json/rain.json';
+  static const String jsonSun = 'assets/json/sun.json';
+  static const String jsonSunCloud = 'assets/json/sun_cloud.json';
   static const String jsonWind = 'assets/json/wind.json';
 
 }
