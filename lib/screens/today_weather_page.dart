@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
+import 'package:weather_guru/screens/offline_data/saved_city_weather_data.dart';
 import 'package:weather_guru/screens/select_city_page.dart';
 import 'package:weather_guru/utils/constants.dart';
 import 'package:weather_guru/utils/gradient_button.dart';
@@ -9,6 +10,7 @@ import 'package:weather_guru/utils/helpers.dart';
 import '../../../../utils/widgets.dart';
 import '../blocs/fetch_weather/bloc/weather_bloc.dart';
 import '../blocs/fetch_weather/model/fetch_weather_model.dart';
+import '../utils/database/database_helper.dart';
 import 'five_day_weather_page.dart';
 
 class WeatherPage extends StatefulWidget {
@@ -43,6 +45,7 @@ class _WeatherPageState extends State<WeatherPage> {
           if (state is WeatherErrorState) {
             showDialog(
               context: context,
+              barrierDismissible: false,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text(
@@ -52,14 +55,58 @@ class _WeatherPageState extends State<WeatherPage> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
-                  content: Text(
-                    state.message,
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 15),
+                  content: Container(
+                    height: 20.h,
+                    child: Column(
+                      children: [
+                        state.message == "No internet connection"
+                            ? Container(
+                                height: 10.h,
+                                child: Lottie.asset(
+                                  'assets/json/no_internet.json',
+                                ),
+                              )
+                            : Container(
+                                height: 10.h,
+                                child: Lottie.asset(
+                                  'assets/json/not_found.json',
+                                ),
+                              ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            state.message,
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 15),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   actions: <Widget>[
+                    state.message == "No internet connection"
+                        ? TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const OfflineWeatherPage(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              "View Offline Data",
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 15),
+                            ),
+                          )
+                        : const SizedBox(
+                            height: 1,
+                            width: 1,
+                          ),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -69,7 +116,10 @@ class _WeatherPageState extends State<WeatherPage> {
                           ),
                         );
                       },
-                      child: Text("Okay"),
+                      child: const Text(
+                        "Retry",
+                        style: TextStyle(color: Colors.teal, fontSize: 15),
+                      ),
                     ),
                   ],
                 );
@@ -84,6 +134,7 @@ class _WeatherPageState extends State<WeatherPage> {
             } else if (state is WeatherLoadingState) {
               return _buildLoading();
             } else if (state is WeatherSuccessState) {
+              _saveWeatherData(state.weatherForecast);
               return _buildWeatherBody(context, state.weatherForecast);
             } else if (state is WeatherErrorState) {
               return Container();
@@ -311,4 +362,38 @@ class _WeatherPageState extends State<WeatherPage> {
   }
 
   Widget _buildLoading() => Center(child: buildLoader());
+
+  Future<void> _saveWeatherData(List<Weather> forecast) async {
+    final dbHelper = DatabaseHelper.instance;
+    bool dataUpdated = false;
+    Map<String, List<Weather>> groupedData = {};
+    for (var weather in forecast) {
+      String cityNameLowercase = widget.cityName.toLowerCase();
+      if (!groupedData.containsKey(cityNameLowercase)) {
+        groupedData[cityNameLowercase] = [];
+      }
+      groupedData[cityNameLowercase]!.add(weather);
+    }
+    for (var cityName in groupedData.keys) {
+      var existingCity = await dbHelper.queryCity(cityName);
+      if (existingCity != null) {
+        List<Weather> cityWeatherData = groupedData[cityName]!;
+        await dbHelper.updateWeatherDataBatch(
+            existingCity['id'], cityWeatherData);
+        dataUpdated = true;
+      } else {
+        List<Weather> cityWeatherData = groupedData[cityName]!;
+        await dbHelper.insertWeatherDataBatch(cityName, cityWeatherData);
+      }
+    }
+
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(dataUpdated
+            ? ' Update synced successfully'
+            : 'Data saved successfully'),
+      ),
+    );
+  }
 }
