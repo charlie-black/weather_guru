@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 import 'package:weather_guru/environment.dart';
 import 'package:weather_guru/screens/today_weather_page.dart';
@@ -55,9 +56,11 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               SizedBox(
-                height: 10.h,
+                height: 20.h,
               ),
-              const Padding(
+              Lottie.asset('assets/json/compass.json',
+                  height: 150, width: 150),
+            const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text('Weather Guru',style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),),
               ),
@@ -114,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
                     ),
-                    labelText: 'Enter City',
+                    labelText: 'Type in a City',
                     labelStyle: const TextStyle(
                         fontWeight: FontWeight.normal,
                         color: Colors.black),
