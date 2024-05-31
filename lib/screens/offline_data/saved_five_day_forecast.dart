@@ -51,7 +51,10 @@ class _SavedFiveDayForecastState extends State<SavedFiveDayForecast> {
                       height: 50.h,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(30.0),
+                          bottomRight: Radius.circular(30.0),
+                        ),
                         image: DecorationImage(
                           image: AssetImage(
                               "assets/images/${cityWeather.weatherIcon}.jpeg"),

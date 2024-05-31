@@ -63,7 +63,10 @@ class _DetailedSavedCityWeatherState extends State<DetailedSavedCityWeather> {
                 height: 70.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(30.0),
+                    bottomRight: Radius.circular(30.0),
+                  ),
                   image: DecorationImage(
                     image: AssetImage(
                         "assets/images/${todayForecast[0].weatherIcon}.jpeg"),
